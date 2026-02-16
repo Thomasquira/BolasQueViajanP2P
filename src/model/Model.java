@@ -13,6 +13,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * @author thomas
  */
 public class Model {
+
     private final Controller controller;
     private CopyOnWriteArrayList<Ball> ballList;
 
@@ -20,27 +21,31 @@ public class Model {
         this.controller = controller;
         this.ballList = new CopyOnWriteArrayList<>();
     }
-    
+
     public void recibirBola(BallDTO balldto) {
-        Ball b = new Ball(this); 
+        Ball b = new Ball(this);
         b.setDatosDeFuera(balldto.x, balldto.y, balldto.speedX, balldto.speedY, balldto.color);
         ballList.add(b);
     }
 
     public void mandarBola(Ball b) {
-        ballList.remove(b); 
-        
+
         int nuevaX = (b.getX() >= getViewerWidth() - 30) ? 0 : getViewerWidth() - 30;
-        
+
         BallDTO ballDto = new BallDTO(
-            nuevaX, 
-            b.getY(), 
-            b.getSpeedX(), 
-            b.getSpeedY(), 
-            b.getColor()
+                nuevaX,
+                b.getY(),
+                b.getSpeedX(),
+                b.getSpeedY(),
+                b.getColor()
         );
-        
-        controller.EnviarBola(ballDto);
+
+        if (bolasqueviajanp2p.MasterController.communicationsController.getConnection() != null) {
+            controller.EnviarBola(ballDto);
+            ballList.remove(b); 
+        } else {
+            System.out.println("No hay conexión, no se envía la bola.");
+        }
     }
 
     public void addBall() {
@@ -59,6 +64,7 @@ public class Model {
     public int getViewerHeight() {
         return controller.getViewerHeight();
     }
+
     public void removeBalls() {
         ballList.clear();
     }

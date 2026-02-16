@@ -53,6 +53,7 @@ public class Ball implements Runnable, Serializable {
         this.y = y;
         this.speedX = sx;
         this.speedY = sy;
+        this.COLOR = c;
     }
 
     public int getX() {
@@ -89,7 +90,7 @@ public class Ball implements Runnable, Serializable {
 
                 if (x + diameter >= model.getViewerWidth()) {
                     model.mandarBola(this);
-                    break; 
+                    break;
                 }
                 if (y <= 0) {
                     y = 0;

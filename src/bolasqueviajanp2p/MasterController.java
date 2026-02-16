@@ -23,14 +23,14 @@ public class MasterController {
     public static Controller controller;
     public static CommunicationsController communicationsController;
 
-    private static final String IP_EQUIPO_1 = "172.16.8.25"; // Ip del thomas
-    private static final String IP_EQUIPO_2 = "172.16.8.23"; // IP del otro
+    private static final String IP_EQUIPO_1 = "172.16.8.96"; // Ip del thomas
+    private static final String IP_EQUIPO_2 = "172.16.8.71"; // IP del otro
 
     public MasterController() throws IOException {
-        String miIP = obtenerMiIP();
+        String miIP = obtenerIPPropia();
         String peerHost = obtenerIPRemota(miIP);
 
-        System.out.println("Mi IP: " + miIP + " | IP Remota a conectar: " + peerHost);
+        System.out.println("Mi ip: " + miIP);
 
         controller = new Controller();
         controller.getView().startViewer();
@@ -40,17 +40,18 @@ public class MasterController {
     }
 
     private String obtenerIPRemota(String miIP){
+        System.out.println(miIP);
         if (miIP.equals(IP_EQUIPO_1)) {
             return IP_EQUIPO_2;
         } else if (miIP.equals(IP_EQUIPO_2)) {
             return IP_EQUIPO_1;
         } else {
-            System.out.println("MODO DESARROLLO: IP no reconocida, usando localhost");
+            System.out.println("usando localhost");
             return "localhost";
         }
     }
 
-    private String obtenerMiIP(){
+    private String obtenerIPPropia(){
         try {
             Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
             while (interfaces.hasMoreElements()) {
