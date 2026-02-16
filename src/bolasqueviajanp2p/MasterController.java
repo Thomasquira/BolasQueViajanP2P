@@ -30,7 +30,7 @@ public class MasterController {
         String miIP = obtenerIPPropia();
         String peerHost = obtenerIPRemota(miIP);
 
-        System.out.println("Mi ip: " + miIP);
+        System.out.println("Mi ip: " + miIP + "ip del pir: " + peerHost);
 
         controller = new Controller();
         controller.getView().startViewer();
