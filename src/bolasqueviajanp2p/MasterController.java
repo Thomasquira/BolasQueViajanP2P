@@ -7,6 +7,7 @@ package bolasqueviajanp2p;
 import java.io.IOException;
 import controller.Controller;
 import Communications.CommunicationsController;
+import Communications.Connections.Channel;
 import DTO.BallDTO;
 import java.net.Inet4Address;
 import java.net.InetAddress;
@@ -82,18 +83,19 @@ public class MasterController {
     }
 
     public static void enviar(Object obj) {
-        if (communicationsController != null) {
-            try {
-                if (communicationsController.getConnection() != null) {
-                    communicationsController.getConnection().send(obj);
-                } else {
-                    System.out.println("Conexión aún no establecida, bola perdida.");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+    if (communicationsController != null) {
+        try {
+            Channel c = communicationsController.getConnection(); 
+            if (c != null && c.taVivo()) { 
+                c.send(obj); 
+            } else {
+                System.out.println("Conexión perdida. Intentando reconectar...");
             }
+        } catch (Exception e) {
+            System.err.println("Error de red: " + e.getMessage()); 
         }
     }
+}
 
     public static void recibirBolaRed(BallDTO bola) {
         if (controller != null) {

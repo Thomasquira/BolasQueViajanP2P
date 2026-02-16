@@ -36,23 +36,22 @@ public class ServerConnector implements Runnable {
                 synchronized (this) {
                     if (connection == null || !connection.taVivo()) {
                         connection = new Channel(viene);
-                        System.out.println("Conexión hecha");
+                        System.out.println("Nueva conexión aceptada tras desconexión");
                     } else {
                         viene.close();
-                        System.out.println("Conexión rechazada");
                     }
                 }
             } catch (Exception e) {
             }
         }
     }
-    
+
     public int getListeningPort() {
-    if (serverSocket != null && !serverSocket.isClosed()) {
-        return serverSocket.getLocalPort();
+        if (serverSocket != null && !serverSocket.isClosed()) {
+            return serverSocket.getLocalPort();
+        }
+        return -1;
     }
-    return -1;
-}
 
     public ServerSocket getServerSocket() {
         return serverSocket;

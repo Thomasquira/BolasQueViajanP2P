@@ -29,7 +29,7 @@ public class Model {
     }
 
     public void mandarBola(Ball b) {
-        int nuevaX = (b.getX() >= getViewerWidth() - 30) ? 5 : getViewerWidth() - 35;
+        int nuevaX = (b.getX() >= getViewerWidth() - b.getDiameter()) ? 5 : getViewerWidth() - b.getDiameter();
 
         BallDTO ballDto = new BallDTO(
                 nuevaX,
