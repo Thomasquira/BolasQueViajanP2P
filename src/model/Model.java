@@ -24,25 +24,25 @@ public class Model {
 
     public void recibirBola(BallDTO balldto) {
         Ball b = new Ball(this);
-        b.setDatosDeFuera(balldto.x, balldto.y, balldto.speedX, balldto.speedY, balldto.color);
+        b.setDatosDeFuera(balldto.x, balldto.y, balldto.speedX, balldto.speedY, balldto.color, balldto.diameter);
         ballList.add(b);
     }
 
     public void mandarBola(Ball b) {
-
-        int nuevaX = (b.getX() >= getViewerWidth() - 30) ? 0 : getViewerWidth() - 30;
+        int nuevaX = (b.getX() >= getViewerWidth() - 30) ? 5 : getViewerWidth() - 35;
 
         BallDTO ballDto = new BallDTO(
                 nuevaX,
                 b.getY(),
                 b.getSpeedX(),
                 b.getSpeedY(),
-                b.getColor()
+                b.getColor(),
+                b.getDiameter()
         );
 
         if (bolasqueviajanp2p.MasterController.communicationsController.getConnection() != null) {
             controller.EnviarBola(ballDto);
-            ballList.remove(b); 
+            ballList.remove(b);
         } else {
             System.out.println("No hay conexión, no se envía la bola.");
         }

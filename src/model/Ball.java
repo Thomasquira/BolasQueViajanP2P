@@ -17,7 +17,7 @@ public class Ball implements Runnable, Serializable {
 
     private int x, y;
     private int speedX, speedY;
-    private final int diameter;
+    private  int diameter;
 
     private Color COLOR;
     private final Model model;
@@ -48,12 +48,13 @@ public class Ball implements Runnable, Serializable {
         this.thread.start();
     }
 
-    public void setDatosDeFuera(int x, int y, int sx, int sy, Color c) {
+    public void setDatosDeFuera(int x, int y, int sx, int sy, Color c, int d) {
         this.x = x;
         this.y = y;
         this.speedX = sx;
         this.speedY = sy;
         this.COLOR = c;
+        this.diameter = d;
     }
 
     public int getX() {
@@ -120,4 +121,14 @@ public class Ball implements Runnable, Serializable {
     public Channel getChannel() {
         return channel;
     }
+
+    public int getDiameter() {
+        return diameter;
+    }
+
+    public void setDiameter(int diameter) {
+        this.diameter = diameter;
+    }
+    
+    
 }

@@ -15,13 +15,15 @@ public class BallDTO implements Serializable {
     public int x, y;
     public int speedX, speedY;
     public Color color;
+    public int diameter;
 
-    public BallDTO(int x, int y, int speedX, int speedY, Color color) {
+    public BallDTO(int x, int y, int speedX, int speedY, Color color, int d) {
         this.x = x;
         this.y = y;
         this.speedX = speedX;
         this.speedY = speedY;
         this.color = color;
+        this.diameter = d;
     }
 }
 
