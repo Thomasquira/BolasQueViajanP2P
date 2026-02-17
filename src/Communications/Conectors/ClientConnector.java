@@ -43,12 +43,13 @@ public class ClientConnector implements Runnable {
                         probarConexion(port2);
                     }
                 }
-                Thread.sleep(300);
+                Thread.sleep(1000);
             } catch (Exception e) {
                 connection = null;
                 try {
-                    Thread.sleep(300);
-                } catch (InterruptedException ex) {
+                    Thread.sleep(1000);
+                } catch (Exception ex) {
+                    System.out.println("Intentando conectarse");
                 }
             }
         }
@@ -62,7 +63,8 @@ public class ClientConnector implements Runnable {
             connection = new Channel(socket);
             System.out.println("Cliente conectado a: " + port);
         } catch (IOException ignored) {
-            ignored.printStackTrace();
+            System.out.println("Probando otro puerto");
+          
         }
     }
 

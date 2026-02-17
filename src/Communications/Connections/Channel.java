@@ -20,11 +20,13 @@ public class Channel implements Runnable {
     ObjectOutputStream out;
     volatile boolean taVivo = true;
     private Thread thread;
+    private HealthChannel healthChannel;
 
     public Channel(Socket socket) throws IOException {
         this.socket = socket;
         this.out = new ObjectOutputStream(socket.getOutputStream());
         this.in = new ObjectInputStream(socket.getInputStream());
+        this.healthChannel = new HealthChannel(this);
 
         thread = new Thread(this);
         thread.start();
@@ -49,8 +51,12 @@ public class Channel implements Runnable {
     }
 
     private void procesarMensaje(Object obj) {
+        if (healthChannel != null) {
+            healthChannel.Udate();
+        }
+
         if (obj instanceof String && obj.equals("PING")) {
-            return;
+            return; 
         }
 
         if (obj instanceof DTO.BallDTO) {
