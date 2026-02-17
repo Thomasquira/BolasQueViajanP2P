@@ -63,7 +63,7 @@ public class ClientConnector implements Runnable {
             connection = new Channel(socket);
             System.out.println("Cliente conectado a: " + port);
         } catch (IOException ignored) {
-            System.out.println("Probando otro puerto");
+            //System.out.println("Probando otro puerto");
           
         }
     }
