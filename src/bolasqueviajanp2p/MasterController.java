@@ -24,8 +24,8 @@ public class MasterController {
     public static Controller controller;
     public static CommunicationsController communicationsController;
 
-    private static final String IP_EQUIPO_1 = "172.16.8.85"; // Ip del thomas
-    private static final String IP_EQUIPO_2 = "172.16.8.89"; // IP del otro
+    private static final String IP_EQUIPO_1 = "172.16.8.96"; // Ip del thomas
+    private static final String IP_EQUIPO_2 = "172.16.8.71"; // IP del otro
 
     public MasterController() throws IOException {
         String miIP = obtenerIPPropia();

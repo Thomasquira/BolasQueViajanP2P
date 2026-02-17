@@ -31,7 +31,7 @@ public class ClientConnector implements Runnable {
         while (true) {
             try {
                 if (connection == null || !connection.taVivo()) {
-                    connection = null; 
+
                     if (port1 != forbiddenPort) {
                         probarConexion(port1);
                     }
@@ -42,10 +42,9 @@ public class ClientConnector implements Runnable {
                 }
                 Thread.sleep(3000);
             } catch (Exception e) {
-                connection = null; 
                 try {
                     Thread.sleep(3000);
-                } catch (Exception ex) {
+                } catch (InterruptedException ex) {
                 }
             }
         }

@@ -28,23 +28,21 @@ public class Channel implements Runnable {
 
         thread = new Thread(this);
         thread.start();
-
-        new HealthChannel(this);
     }
 
     @Override
     public void run() {
         try {
-            while (taVivo) {
+            while (taVivo) {                
                 Object obj = in.readObject();
                 procesarMensaje(obj);
             }
-
+            
         } catch (Exception e) {
             close();
         }
     }
-
+    
     public synchronized void send(Object obj) throws IOException {
         out.writeObject(obj);
         out.flush();
@@ -59,7 +57,7 @@ public class Channel implements Runnable {
             System.out.println("Recibido objeto desconocido: " + obj.getClass().getSimpleName());
         }
     }
-
+    
     public void close() {
         taVivo = false;
         try {
@@ -69,7 +67,8 @@ public class Channel implements Runnable {
     }
 
     public boolean taVivo() {
-        return taVivo && socket != null && !socket.isClosed() && socket.isConnected();
+        return taVivo && !socket.isClosed();
     }
-
+    
+    
 }
