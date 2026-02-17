@@ -36,7 +36,7 @@ public class HealthChannel implements Runnable {
                     break;
                 }
                 
-                Thread.sleep(2000);
+                Thread.sleep(500);
             } catch (Exception e) {
                 channel.close();
             }

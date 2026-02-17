@@ -24,8 +24,8 @@ public class MasterController {
     public static Controller controller;
     public static CommunicationsController communicationsController;
 
-    private static final String IP_EQUIPO_1 = "172.16.8.96"; // Ip del thomas
-    private static final String IP_EQUIPO_2 = "172.16.8.71"; // IP del otro
+    private static final String IP_EQUIPO_1 = "172.16.8.85"; // Ip del thomas
+    private static final String IP_EQUIPO_2 = "172.16.8.89"; // IP del otro
 
     public MasterController() throws IOException {
         String miIP = obtenerIPPropia();
@@ -85,16 +85,18 @@ public class MasterController {
     public static void enviar(Object obj) {
     if (communicationsController != null) {
         try {
-            Channel c = communicationsController.getConnection(); 
+            Channel c = communicationsController.getConnection();
             if (c != null && c.taVivo()) { 
-                c.send(obj); 
+                c.send(obj);
             } else {
-                System.out.println("Conexión perdida. Intentando reconectar...");
+                System.out.println("Conexión perdida al intentar enviar.");
+                if(c != null) c.close(); 
             }
         } catch (Exception e) {
-            System.err.println("Error de red: " + e.getMessage()); 
+            System.err.println("Error de red: " + e.getMessage());
         }
     }
+
 }
 
     public static void recibirBolaRed(BallDTO bola) {

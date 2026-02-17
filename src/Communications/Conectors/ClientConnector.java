@@ -43,11 +43,11 @@ public class ClientConnector implements Runnable {
                         probarConexion(port2);
                     }
                 }
-                Thread.sleep(3000);
+                Thread.sleep(300);
             } catch (Exception e) {
                 connection = null;
                 try {
-                    Thread.sleep(3000);
+                    Thread.sleep(300);
                 } catch (InterruptedException ex) {
                 }
             }
@@ -56,11 +56,13 @@ public class ClientConnector implements Runnable {
 
     public void probarConexion(int port) {
         try {
-            System.out.println("Probando conexión con: " + port);
-            Socket socket = new Socket(host, port);
+            // System.out.println("Probando conexión con: " + port);
+            Socket socket = new Socket();
+            socket.connect(new java.net.InetSocketAddress(host, port), 200);
             connection = new Channel(socket);
             System.out.println("Cliente conectado a: " + port);
         } catch (IOException ignored) {
+            ignored.printStackTrace();
         }
     }
 
