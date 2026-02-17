@@ -28,7 +28,7 @@ public class Ball implements Runnable, Serializable {
     public Ball(Model model) {
         this.model = model;
 
-        this.diameter = 15 + (int) (Math.random() * 50);
+        this.diameter = 10 + (int) (Math.random() * 30);
 
         this.x = (int) (Math.random() * (model.getViewerWidth() - diameter));
         this.y = (int) (Math.random() * (model.getViewerHeight() - diameter));
