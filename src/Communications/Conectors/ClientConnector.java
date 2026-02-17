@@ -30,18 +30,22 @@ public class ClientConnector implements Runnable {
     public void run() {
         while (true) {
             try {
-                if (connection == null || !connection.taVivo()) {
+                if (connection != null && !connection.taVivo()) {
+                    connection = null;
+                    System.out.println("Conexión detectada muerta. Reiniciando búsqueda...");
+                }
 
+                if (connection == null) {
                     if (port1 != forbiddenPort) {
                         probarConexion(port1);
                     }
-
                     if (connection == null && port2 != forbiddenPort) {
                         probarConexion(port2);
                     }
                 }
                 Thread.sleep(3000);
             } catch (Exception e) {
+                connection = null;
                 try {
                     Thread.sleep(3000);
                 } catch (InterruptedException ex) {

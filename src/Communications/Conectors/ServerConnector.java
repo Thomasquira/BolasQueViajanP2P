@@ -34,14 +34,14 @@ public class ServerConnector implements Runnable {
             try {
                 Socket viene = serverSocket.accept();
                 synchronized (this) {
-                    if (connection == null || !connection.taVivo()) {
-                        connection = new Channel(viene);
-                        System.out.println("Nueva conexión aceptada tras desconexión");
-                    } else {
-                        viene.close();
+                    if (connection != null) {
+                        connection.close();
                     }
+
+                    connection = new Channel(viene);
                 }
             } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }

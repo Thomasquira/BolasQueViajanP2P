@@ -7,11 +7,13 @@ package view;
 import javax.swing.JFrame;
 import controller.Controller;
 import java.awt.BorderLayout;
+
 /**
  *
  * @author thomas
  */
 public class View extends JFrame {
+
     private final Controller controller;
     private final Viewer viewer;
     private final ControlPanel controlPanel;
@@ -33,8 +35,19 @@ public class View extends JFrame {
         setVisible(true);
     }
 
-    public Controller getController() { return controller; }
-    public int getViewerWidth() { return viewer.getWidth(); }
-    public int getViewerHeight() { return viewer.getHeight(); }
-    public void startViewer() { viewer.start(); }
+    public Controller getController() {
+        return controller;
+    }
+
+    public int getViewerWidth() {
+        return viewer.getWidth();
+    }
+
+    public int getViewerHeight() {
+        return viewer.getHeight();
+    }
+
+    public void startViewer() {
+        viewer.start();
+    }
 }

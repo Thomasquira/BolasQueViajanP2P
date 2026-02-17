@@ -33,31 +33,34 @@ public class Channel implements Runnable {
     @Override
     public void run() {
         try {
-            while (taVivo) {                
+            while (taVivo) {
                 Object obj = in.readObject();
                 procesarMensaje(obj);
             }
-            
         } catch (Exception e) {
+            System.out.println("Se fue la conexión parce :((((, el otro se fue unu.");
             close();
         }
     }
-    
+
     public synchronized void send(Object obj) throws IOException {
         out.writeObject(obj);
         out.flush();
     }
 
     private void procesarMensaje(Object obj) {
+        if (obj instanceof String && obj.equals("PING")) {
+            return;
+        }
+
         if (obj instanceof DTO.BallDTO) {
             System.out.println("Bola recibida!");
-
             bolasqueviajanp2p.MasterController.recibirBolaRed((DTO.BallDTO) obj);
         } else {
             System.out.println("Recibido objeto desconocido: " + obj.getClass().getSimpleName());
         }
     }
-    
+
     public void close() {
         taVivo = false;
         try {
@@ -69,6 +72,5 @@ public class Channel implements Runnable {
     public boolean taVivo() {
         return taVivo && !socket.isClosed();
     }
-    
-    
+
 }
